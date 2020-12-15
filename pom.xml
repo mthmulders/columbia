@@ -19,9 +19,12 @@
         <sonar.organization>mthmulders-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
+        <sha1>unknown revision</sha1>
+
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <lombok.version>1.18.16</lombok.version>
         <spring-boot.version>2.4.1</spring-boot.version>
+        <vaadin.version>14.4.4</vaadin.version>
     </properties>
 
     <scm>
@@ -70,8 +73,31 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
