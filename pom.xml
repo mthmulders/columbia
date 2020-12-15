@@ -248,18 +248,14 @@
                         </dependency>
                     </dependencies>
                     <configuration>
-                        <!--                        <mutationThreshold>80</mutationThreshold>-->
-                        <excludedClasses>
-                            <param>*_*</param>
-                            <param>*DaggerComponents</param>
-                        </excludedClasses>
+                        <!-- <mutationThreshold>80</mutationThreshold> -->
                         <outputFormats>
                             <param>CSV</param>
                             <param>HTML2</param>
                             <param>XML</param>
                         </outputFormats>
                         <targetClasses>
-                            <param>it.mulders.mpb.*</param>
+                            <param>it.mulders.columbia.*</param>
                         </targetClasses>
                     </configuration>
                 </plugin>
@@ -385,6 +381,7 @@
                                 <goals>
                                     <goal>mutationCoverage</goal>
                                 </goals>
+                                <phase>test</phase>
                             </execution>
                         </executions>
                     </plugin>
