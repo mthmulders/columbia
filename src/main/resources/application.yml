@@ -1,0 +1,14 @@
+logging:
+  level:
+    ROOT: WARN
+    it.mulders: INFO
+
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:db/changelog.xml
+  main:
+    banner-mode: off

@@ -1,0 +1,14 @@
+logging:
+  level:
+    ROOT: WARN
+    it.mulders: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/columbia
+    username: columbia
+    password: columbia
+  devtools:
+    restart:
+      poll-interval: 2s
+      quiet-period: 1s
