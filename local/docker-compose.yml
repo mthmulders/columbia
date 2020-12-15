@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+
+  columbia-database:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_USER: columbia
+      POSTGRES_PASSWORD: columbia
+      POSTGRES_DB: columbia
+    ports:
+      - '5432:5432'
