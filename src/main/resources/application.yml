@@ -12,3 +12,5 @@ spring:
     change-log: classpath:db/changelog.xml
   main:
     banner-mode: off
+  mustache:
+    check-template-location: false
