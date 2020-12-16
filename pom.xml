@@ -24,7 +24,7 @@
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <lombok.version>1.18.16</lombok.version>
         <spring-boot.version>2.4.1</spring-boot.version>
-        <vaadin.version>14.4.4</vaadin.version>
+        <vaadin.version>18.0.2</vaadin.version>
     </properties>
 
     <scm>
@@ -112,6 +112,18 @@
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
                     <artifactId>commons-compress</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger.codegen.v3</groupId>
+                    <artifactId>swagger-codegen</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger.codegen.v3</groupId>
+                    <artifactId>swagger-codegen-generators</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.javassist</groupId>
+                    <artifactId>javassist</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
