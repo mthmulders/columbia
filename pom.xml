@@ -140,6 +140,8 @@
                     <excludeDevtools>true</excludeDevtools>
                     <executable>true</executable>
                     <mainClass>it.mulders.columbia.Columbia</mainClass>
+                    <maxAttempts>240</maxAttempts>
+                    <wait>500</wait>
                 </configuration>
                 <executions>
                     <execution>
