@@ -1,0 +1,61 @@
+.vaults-view vaadin-grid {
+  line-height: var(--lumo-line-height-m);
+}
+
+.vaults-view vaadin-grid,
+.vaults-view vaadin-grid-cell-content {
+  background-color: var(--lumo-contrast-10pct);
+}
+
+.vaults-view .card {
+  background-color: var(--lumo-base-color);
+  border-radius: var(--lumo-border-radius);
+  box-shadow: var(--lumo-box-shadow-xs);
+  padding: calc(var(--lumo-space-s) * 1.5) var(--lumo-space-m);
+}
+
+.vaults-view img {
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: var(--lumo-size-m);
+  width: var(--lumo-size-m);
+}
+
+.vaults-view .header {
+  align-items: baseline;
+}
+
+.vaults-view .name {
+  font-size: var(--lumo-font-size-s);
+  font-weight: bold;
+}
+
+.vaults-view .date {
+  color: var(--lumo-tertiary-text-color);
+  font-size: var(--lumo-font-size-xs);
+}
+
+.vaults-view .post {
+  color: var(--lumo-secondary-text-color);
+  font-size: var(--lumo-font-size-s);
+  margin-bottom: var(--lumo-space-s);
+  white-space: normal;
+}
+
+.vaults-view .actions {
+  align-items: center;
+}
+
+.vaults-view iron-icon {
+  color: var(--lumo-tertiary-text-color);
+  height: calc(var(--lumo-icon-size-s) * 0.8);
+  width: calc(var(--lumo-icon-size-s) * 0.8);
+}
+
+.vaults-view .likes,
+.vaults-view .comments,
+.vaults-view .shares {
+  color: var(--lumo-tertiary-text-color);
+  font-size: var(--lumo-font-size-xs);
+  margin-right: var(--lumo-space-l);
+}
