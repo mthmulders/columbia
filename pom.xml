@@ -137,6 +137,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <additionalProperties>
+                        <build.sha1>revision ${sha1}</build.sha1>
+                    </additionalProperties>
                     <excludeDevtools>true</excludeDevtools>
                     <executable>true</executable>
                     <mainClass>it.mulders.columbia.Columbia</mainClass>
@@ -144,6 +147,13 @@
                     <wait>500</wait>
                 </configuration>
                 <executions>
+                    <execution>
+                        <id>generate-build-info</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>repackage</id>
                         <goals>
