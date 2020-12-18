@@ -282,7 +282,6 @@
                         </dependency>
                     </dependencies>
                     <configuration>
-                        <!-- <mutationThreshold>80</mutationThreshold> -->
                         <outputFormats>
                             <param>CSV</param>
                             <param>HTML2</param>
