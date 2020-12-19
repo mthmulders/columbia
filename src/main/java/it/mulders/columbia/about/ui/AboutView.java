@@ -7,12 +7,9 @@ import com.vaadin.flow.router.Route;
 import it.mulders.columbia.about.SystemStatusHelper;
 import it.mulders.columbia.ui.MainView;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 @PageTitle("About")
 @Route(value = "about", layout = MainView.class)
 public class AboutView extends Div {
@@ -24,7 +21,6 @@ public class AboutView extends Div {
 
     private final SystemStatusHelper systemStatusHelper;
 
-    @Autowired
     public AboutView(final SystemStatusHelper systemStatusHelper) {
         this.systemStatusHelper = systemStatusHelper;
         setId("about-view");
