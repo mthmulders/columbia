@@ -19,7 +19,7 @@
         <sonar.organization>mthmulders-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-        <sha1>unknown revision</sha1>
+        <sha1>unknown</sha1>
 
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <lombok.version>1.18.16</lombok.version>
