@@ -6,6 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.info.BuildProperties;
 
 import javax.sql.DataSource;
@@ -72,6 +75,19 @@ class SystemStatusHelperTest implements WithAssertions {
     }
 
     @Test
+    void should_report_database_info_without_database_connection() throws SQLException {
+        // Arrange
+        when(datasource.getConnection()).thenThrow(SQLException.class);
+        var helper = new SystemStatusHelper(new BuildProperties(properties), datasource);
+
+        // Act
+        var result = helper.systemStatus();
+
+        // Assert
+        assertThat(result.getDatabaseInfo()).contains("Error connecting to database");
+    }
+
+    @Test
     void should_report_free_memory() {
         // Arrange
         var helper = new SystemStatusHelper(new BuildProperties(properties), datasource);
@@ -105,5 +121,13 @@ class SystemStatusHelperTest implements WithAssertions {
 
         // Assert
         assertThat(result.getOs()).isNotNull();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:1 B", "1024:1 KB", "1048576:1 MB", "1073741824:1 GB"}, delimiter = ':')
+    void human_readable_byte_count(final String input, final String output) {
+        var helper = new SystemStatusHelper(new BuildProperties(properties), datasource);
+        var result = helper.humanReadableByteCount(Long.parseLong(input));
+        assertThat(result).isEqualTo(output);
     }
 }

@@ -45,7 +45,7 @@ public class SystemStatusHelper {
         }
     }
 
-    private String humanReadableByteCount(long bytes) {
+    String humanReadableByteCount(long bytes) {
         var unit = 1024L;
 
         if (bytes < unit) {
