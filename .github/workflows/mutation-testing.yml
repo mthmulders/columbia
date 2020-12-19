@@ -3,9 +3,7 @@ name: Mutation testing
 on:
   push:
     branches:
-      - master
-  schedule:
-    - cron: '14 3 * * *'
+      - main
 
 jobs:
   build:
