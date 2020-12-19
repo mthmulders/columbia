@@ -61,14 +61,14 @@ class SystemStatusHelperTest implements WithAssertions {
     void should_report_database_info() throws SQLException {
         // Arrange
         when(datasource.getConnection().getMetaData().getDatabaseProductName()).thenReturn("PostgreSQL");
-        when(datasource.getConnection().getMetaData().getDatabaseMajorVersion()).thenReturn(11);
+        when(datasource.getConnection().getMetaData().getDatabaseMajorVersion()).thenReturn(10);
         var helper = new SystemStatusHelper(new BuildProperties(properties), datasource);
 
         // Act
         var result = helper.systemStatus();
 
         // Assert
-        assertThat(result.getDatabaseInfo()).isEqualTo("PostgreSQL 11.9");
+        assertThat(result.getDatabaseInfo()).isEqualTo("PostgreSQL 10");
     }
 
     @Test
