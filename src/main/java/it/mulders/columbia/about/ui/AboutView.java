@@ -31,8 +31,8 @@ public class AboutView extends Div {
         var grid = new Grid<Item>();
         grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.setItems(buildItems());
-        grid.addColumn(i -> i.label).setHeader("Detail");
-        grid.addColumn(i -> i.value).setHeader("Value");
+        grid.addColumn(i -> i.label).setHeader("");
+        grid.addColumn(i -> i.value).setHeader("");
         return grid;
     }
 
