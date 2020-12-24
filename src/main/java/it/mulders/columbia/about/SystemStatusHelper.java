@@ -34,11 +34,9 @@ public class SystemStatusHelper {
     }
 
     private String determineDatabaseInfo() {
-        try {
-            try (var connection = datasource.getConnection()) {
-                var metadata = connection.getMetaData();
-                return String.format("%s %s", metadata.getDatabaseProductName(), metadata.getDatabaseMajorVersion());
-            }
+        try (var connection = datasource.getConnection()) {
+            var metadata = connection.getMetaData();
+            return String.format("%s %s", metadata.getDatabaseProductName(), metadata.getDatabaseMajorVersion());
         } catch (final SQLException e) {
             log.error("Could not connect to database", e);
             return "Error connecting to database: " + e.getMessage();
