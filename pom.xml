@@ -323,6 +323,16 @@
                         </dependency>
                     </dependencies>
                     <configuration>
+                        <avoidCallsTo>
+                            <avoidCallsTo>org.slf4j</avoidCallsTo>
+                        </avoidCallsTo>
+                        <excludedClasses>
+                            <excludedClass>*Builder</excludedClass>
+                        </excludedClasses>
+                        <excludedMethods>
+                            <excludedMethods>equals</excludedMethods>
+                            <excludedMethods>hashCode</excludedMethods>
+                        </excludedMethods>
                         <outputFormats>
                             <param>CSV</param>
                             <param>HTML2</param>
