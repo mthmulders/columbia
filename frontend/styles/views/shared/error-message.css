@@ -8,3 +8,7 @@ error-message, .error-message {
     padding: 1em;
     width: 25%;
 }
+
+.error-message iron-icon {
+    margin-right: 10px;
+}
