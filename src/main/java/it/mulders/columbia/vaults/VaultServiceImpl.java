@@ -9,8 +9,8 @@ import software.amazon.awssdk.services.glacier.GlacierClient;
 import software.amazon.awssdk.services.glacier.model.DescribeVaultOutput;
 import software.amazon.awssdk.services.glacier.model.ListVaultsRequest;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor(onConstructor = @__({ @Autowired }))
 @Slf4j
@@ -27,8 +27,13 @@ public class VaultServiceImpl implements VaultService {
 
     @Override
     public List<Vault> listVaults() throws TechnicalException {
+        return listVaults(null);
+    }
+
+    List<Vault> listVaults(final String marker) throws TechnicalException {
         var request = ListVaultsRequest.builder()
                 .accountId(ACCOUNT_ID)
+                .marker(marker)
                 .build();
 
         try {
@@ -36,14 +41,19 @@ public class VaultServiceImpl implements VaultService {
             var response = client.listVaults(request);
 
             if (response.hasVaultList()) {
+                var result = new ArrayList<Vault>();
+
+                response.vaultList().stream()
+                        .map(this::mapToVault)
+                        .forEach(result::add);
+
+                // By default, this operation returns up to 10 items per request.
+                // If the marker is present, it indicates there is more data to retrieve.
                 if (response.marker() != null) {
-                    // By default, this operation returns up to 10 items per request.
-                    log.warn("There are more vaults available");
+                    result.addAll(listVaults(response.marker()));
                 }
 
-                return response.vaultList().stream()
-                        .map(this::mapToVault)
-                        .collect(Collectors.toList());
+                return result;
             }
 
             log.warn("Response contained no vaults");

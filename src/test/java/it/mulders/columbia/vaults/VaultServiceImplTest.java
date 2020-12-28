@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import software.amazon.awssdk.core.exception.SdkException;
 import software.amazon.awssdk.services.glacier.GlacierClient;
 import software.amazon.awssdk.services.glacier.model.DescribeVaultOutput;
@@ -15,6 +16,8 @@ import software.amazon.awssdk.services.glacier.model.ListVaultsResponse;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -72,6 +75,33 @@ class VaultServiceImplTest implements WithAssertions {
 
                 // Assert
                 .isInstanceOf(TechnicalException.class);
+        }
+
+        @Test
+        void should_retrieve_more_vaults_when_marker_is_not_empty() throws TechnicalException {
+            // Arrange
+            var response1 = ListVaultsResponse.builder()
+                    .marker("some-marker")
+                    .vaultList(DescribeVaultOutput.builder()
+                            .numberOfArchives(0L)
+                            .build())
+                    .build();
+            var response2 = ListVaultsResponse.builder()
+                    .vaultList(DescribeVaultOutput.builder()
+                            .numberOfArchives(0L)
+                            .build())
+                    .build();
+            when(client.listVaults(any(ListVaultsRequest.class))).thenReturn(response1, response2);
+
+            // Act
+            var result = service.listVaults();
+
+            // Assert
+            assertThat(result).hasSize(2);
+            var captor = ArgumentCaptor.forClass(ListVaultsRequest.class);
+            verify(client, times(2)).listVaults(captor.capture());
+
+            assertThat(captor.getAllValues().get(1).marker()).isEqualTo("some-marker");
         }
     }
 }
