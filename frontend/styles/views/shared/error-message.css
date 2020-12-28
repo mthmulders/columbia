@@ -1,0 +1,10 @@
+error-message, .error-message {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),
+                0  6px 20px 0 rgba(0,0,0,0.19) !important;
+    background-color: rgba(255, 0, 0, 0.8);
+    border: 2px solid darkred;
+    display: block;
+    margin: 15px;
+    padding: 1em;
+    width: 25%;
+}

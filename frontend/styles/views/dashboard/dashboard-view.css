@@ -1,5 +1,4 @@
-dashboard-view,
-#dashboard-view {
-  display: block;
+dashboard-view, #dashboard-view {
+  display: flex;
   padding: 1em;
 }
