@@ -36,6 +36,7 @@ class VaultServiceImplTest implements WithAssertions {
                             .vaultARN("arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault")
                             .vaultName("Example_Vault")
                             .numberOfArchives(3L)
+                            .sizeInBytes(1024L)
                             .build())
                     .build();
             when(client.listVaults(any(ListVaultsRequest.class))).thenReturn(response);
@@ -47,6 +48,7 @@ class VaultServiceImplTest implements WithAssertions {
             assertThat(result).containsOnly(Vault.builder()
                     .arn("arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault")
                     .archiveCount(3)
+                    .sizeInBytes(1024L)
                     .name("Example_Vault")
                     .build()
             );
@@ -84,11 +86,13 @@ class VaultServiceImplTest implements WithAssertions {
                     .marker("some-marker")
                     .vaultList(DescribeVaultOutput.builder()
                             .numberOfArchives(0L)
+                            .sizeInBytes(1024L)
                             .build())
                     .build();
             var response2 = ListVaultsResponse.builder()
                     .vaultList(DescribeVaultOutput.builder()
                             .numberOfArchives(0L)
+                            .sizeInBytes(1024L)
                             .build())
                     .build();
             when(client.listVaults(any(ListVaultsRequest.class))).thenReturn(response1, response2);

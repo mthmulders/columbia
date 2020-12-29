@@ -70,6 +70,7 @@ public class VaultServiceImpl implements VaultService {
                 .archiveCount(describeVaultOutput.numberOfArchives())
                 .arn(describeVaultOutput.vaultARN())
                 .name(describeVaultOutput.vaultName())
+                .sizeInBytes(describeVaultOutput.sizeInBytes())
                 .build();
     }
 }

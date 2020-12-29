@@ -1,5 +1,6 @@
 package it.mulders.columbia.about;
 
+import it.mulders.columbia.shared.ui.ByteCountHelper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class SystemStatusHelper {
 
         return SystemStatus.builder()
                 .applicationVersion(String.format("%s (%s)", buildProperties.getVersion(), buildProperties.get("build.sha1")))
-                .availableMem(humanReadableByteCount(runtime.totalMemory()))
+                .availableMem(ByteCountHelper.humanReadableByteCount(runtime.totalMemory()))
                 .databaseInfo(determineDatabaseInfo())
-                .freeMem(humanReadableByteCount(runtime.freeMemory()))
+                .freeMem(ByteCountHelper.humanReadableByteCount(runtime.freeMemory()))
                 .javaVersion(javaVersion)
                 .os(os)
                 .build();
@@ -40,20 +41,6 @@ public class SystemStatusHelper {
         } catch (final SQLException e) {
             log.error("Could not connect to database", e);
             return "Error connecting to database: " + e.getMessage();
-        }
-    }
-
-    String humanReadableByteCount(long bytes) {
-        var unit = 1024L;
-
-        if (bytes < unit) {
-            return bytes + " B";
-        } else {
-            var exp = (int) (Math.log(bytes) / Math.log(unit));
-            var prefix = "KMGTPE".charAt(exp - 1);
-            var amount = (int) (bytes / Math.pow(unit, exp));
-
-            return amount + " " + prefix + "B";
         }
     }
 }

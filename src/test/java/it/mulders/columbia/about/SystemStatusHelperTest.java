@@ -121,12 +121,4 @@ class SystemStatusHelperTest implements WithAssertions {
         // Assert
         assertThat(result.getOs()).isNotNull();
     }
-
-    @ParameterizedTest
-    @CsvSource(value = {"1:1 B", "1024:1 KB", "1048576:1 MB", "1073741824:1 GB"}, delimiter = ':')
-    void human_readable_byte_count(final String input, final String output) {
-        var helper = new SystemStatusHelper(new BuildProperties(properties), datasource);
-        var result = helper.humanReadableByteCount(Long.parseLong(input));
-        assertThat(result).isEqualTo(output);
-    }
 }

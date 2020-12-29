@@ -6,21 +6,21 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+import java.text.NumberFormat;
+
 @CssImport("./styles/views/dashboard/counter.css")
 class Counter extends VerticalLayout {
-    Counter(final String label, final long value) {
-        this(label, Long.toString(value));
-    }
+    private static final NumberFormat FORMATTING = NumberFormat.getInstance();
 
-    Counter(final String label, final int value) {
-        this(label, Integer.toString(value));
+    Counter(final String label, final Number value) {
+        this(label, FORMATTING.format(value));
     }
 
     Counter(final String label, final String value) {
         setClassName("counter");
         add(label(label));
         add(value(value));
-        setWidth("25%");
+        setWidth("33%");
     }
 
     private Component label(final String label) {
