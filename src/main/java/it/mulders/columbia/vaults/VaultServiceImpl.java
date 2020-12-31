@@ -37,7 +37,7 @@ public class VaultServiceImpl implements VaultService {
                 .build();
 
         try {
-            log.info("List Glacier vaults: accountId={}", ACCOUNT_ID);
+            log.info("List Glacier vaults: accountId={}, marker={}", ACCOUNT_ID, marker);
             var response = client.listVaults(request);
 
             if (response.hasVaultList()) {
