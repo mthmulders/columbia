@@ -1,5 +1,6 @@
-package it.mulders.columbia.dashboard;
+package it.mulders.columbia.dashboard.ui;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import it.mulders.columbia.AbstractKaribuTest;
 import it.mulders.columbia.IntegrationTest;
@@ -17,7 +18,7 @@ import java.util.List;
 
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.joining;
 import static org.mockito.Mockito.when;
 
 @IntegrationTest
@@ -34,26 +35,35 @@ class DashboardIT extends AbstractKaribuTest implements WithAssertions {
                         .arn("arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault_1")
                         .archiveCount(3)
                         .name("Example_Vault_1")
+                        .sizeInBytes(1024L)
                         .build(),
                 Vault.builder()
                         .arn("arn:aws:glacier:eu-central-1:486007468057:vaults/Example_Vault_2")
                         .archiveCount(6)
                         .name("Example_Vault_2")
+                        .sizeInBytes(2304L)
                         .build()
         ));
         prepareKaribu();
     }
 
+    private String getText(final Component component) {
+        return component.getChildren()
+                .filter(Div.class::isInstance)
+                .map(Div.class::cast)
+                .map(Div::getText)
+                .collect(joining(" "));
+    }
+
     @Test
     void should_display_metrics() {
-        _get(Div.class, spec -> spec.withText("Number of vaults")).getParent().ifPresent(counter -> {
-            var value = (Div) counter.getChildren().collect(toList()).get(1);
-            assertThat(value.getText()).isEqualTo("2");
-        });
+        var vaultCounter = _get(Counter.class, spec -> spec.withId("num-vaults"));
+        assertThat(getText(vaultCounter)).contains("2");
 
-        _get(Div.class, spec -> spec.withText("Number of archives")).getParent().ifPresent(counter -> {
-            var value = (Div) counter.getChildren().collect(toList()).get(1);
-            assertThat(value.getText()).isEqualTo("9");
-        });
+        var archiveCounter = _get(Counter.class, spec -> spec.withId("num-archives"));
+        assertThat(getText(archiveCounter)).contains("9");
+
+        var sizeCounter = _get(Counter.class, spec -> spec.withId("archive-size"));
+        assertThat(getText(sizeCounter)).contains("3.25 KB");
     }
 }

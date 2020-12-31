@@ -14,6 +14,7 @@ public class ByteCountHelper {
             return Integer.toString((int) number);
         } else {
             var format = new DecimalFormat("#,###.");
+            format.setMinimumFractionDigits(precision);
             format.setMaximumFractionDigits(precision);
             return format.format(number);
         }

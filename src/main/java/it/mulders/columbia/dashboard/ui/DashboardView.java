@@ -12,7 +12,6 @@ import it.mulders.columbia.shared.ui.ErrorMessage;
 import it.mulders.columbia.ui.MainView;
 import it.mulders.columbia.vaults.Vault;
 import it.mulders.columbia.vaults.VaultService;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
@@ -20,7 +19,6 @@ import java.util.List;
 @PageTitle("Dashboard")
 @Route(value = "dashboard", layout = MainView.class)
 @RouteAlias(value = "", layout = MainView.class)
-@Slf4j
 public class DashboardView extends HorizontalLayout {
     public DashboardView(final VaultService vaultService) {
         setId("dashboard-view");
@@ -38,18 +36,23 @@ public class DashboardView extends HorizontalLayout {
     }
 
     private Component vaultCounter(final List<Vault> vaults) {
-        return new Counter("Number of vaults", vaults.size());
+        var counter = new Counter("Number of vaults", vaults.size());
+        counter.setId("num-vaults");
+        return counter;
     }
 
     private Component archiveCounter(final List<Vault> vaults) {
         var archiveCount = vaults.stream().mapToLong(Vault::getArchiveCount).sum();
-        return new Counter("Number of archives", archiveCount);
+        var counter = new Counter("Number of archives", archiveCount);
+        counter.setId("num-archives");
+        return counter;
     }
 
     private Component sizeCounter(final List<Vault> vaults) {
         var sizeCount = vaults.stream().mapToLong(Vault::getSizeInBytes).sum();
         var formatted = ByteCountHelper.humanReadableByteCount(sizeCount, 2);
-        log.debug("All vaults together contain {} bytes, formatted as {}", sizeCount, formatted);
-        return new Counter( "Total stored", formatted);
+        var counter = new Counter( "Total stored", formatted);
+        counter.setId("archive-size");
+        return counter;
     }
 }
