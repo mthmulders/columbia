@@ -1,14 +1,11 @@
 package it.mulders.columbia.dashboard.ui;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.html.Div;
 import it.mulders.columbia.AbstractKaribuTest;
 import it.mulders.columbia.IntegrationTest;
 import it.mulders.columbia.shared.TechnicalException;
 import it.mulders.columbia.vaults.Vault;
 import it.mulders.columbia.vaults.VaultService;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +15,9 @@ import java.util.List;
 
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 
-import static java.util.stream.Collectors.joining;
 import static org.mockito.Mockito.when;
 
 @IntegrationTest
-@Slf4j
 class DashboardIT extends AbstractKaribuTest implements WithAssertions {
     @MockBean
     private VaultService vaultService;
@@ -45,14 +40,6 @@ class DashboardIT extends AbstractKaribuTest implements WithAssertions {
                         .build()
         ));
         prepareKaribu();
-    }
-
-    private String getText(final Component component) {
-        return component.getChildren()
-                .filter(Div.class::isInstance)
-                .map(Div.class::cast)
-                .map(Div::getText)
-                .collect(joining(" "));
     }
 
     @Test
