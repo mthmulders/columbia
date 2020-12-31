@@ -17,6 +17,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import it.mulders.columbia.about.ui.AboutView;
 import it.mulders.columbia.dashboard.ui.DashboardView;
+import it.mulders.columbia.vaults.ui.ListVaultsView;
 
 import java.util.Optional;
 
@@ -67,6 +68,7 @@ public class MainView extends AppLayout {
     private Component[] createMenuItems() {
         return new Tab[]{
                 createTab("Dashboard", DashboardView.class),
+                createTab("Vaults", ListVaultsView.class),
                 createTab("About", AboutView.class),
         };
     }
