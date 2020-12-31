@@ -1,5 +1,7 @@
 package it.mulders.columbia.shared.ui;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.DecimalFormat;
 
 /**
@@ -13,9 +15,8 @@ public class ByteCountHelper {
         if (precision == 0) {
             return Integer.toString((int) number);
         } else {
-            var format = new DecimalFormat("#,###.");
-            format.setMinimumFractionDigits(precision);
-            format.setMaximumFractionDigits(precision);
+            var zeroes = StringUtils.repeat('#', precision);
+            var format = new DecimalFormat("#,###." + zeroes);
             return format.format(number);
         }
     }
