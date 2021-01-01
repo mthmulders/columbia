@@ -47,5 +47,5 @@ jobs:
         uses: actions/upload-artifact@v2
         if: github.ref == 'refs/heads/main'
         with:
-          name: columbia.jar
+          name: columbia.deb
           path: target/deb/columbia*.deb
