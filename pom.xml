@@ -530,12 +530,6 @@
 
         <profile>
             <id>ci</id>
-            <activation>
-                <property>
-                    <name>env.CI</name>
-                    <value>true</value>
-                </property>
-            </activation>
             <properties>
                 <!-- See https://community.sonarsource.com/t/java-parse-error-source-level-1-8-or-above-although-project-uses-11/22288/2 -->
                 <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
