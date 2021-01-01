@@ -152,6 +152,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -208,6 +209,57 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.vafer</groupId>
+                <artifactId>jdeb</artifactId>
+                <configuration>
+                    <dataSet>
+                        <data>
+                            <type>file</type>
+                            <src>${project.basedir}/src/deb/columbia.conf</src>
+                            <dst>/opt/${project.artifactId}/${project.artifactId}.conf</dst>
+                            <conffile>true</conffile>
+                        </data>
+                        <data>
+                            <type>file</type>
+                            <src>${project.build.directory}/${project.artifactId}.jar</src>
+                            <dst>/opt/${project.artifactId}/${project.artifactId}.jar</dst>
+                            <mapper>
+                                <type>perm</type>
+                                <filemode>755</filemode>
+                                <user>columbia</user>
+                                <group>columbia</group>
+                            </mapper>
+                        </data>
+                        <!-- symlink from <install-dir>/config to /etc/columbia -->
+                        <data>
+                            <type>link</type>
+                            <linkTarget>/etc/columbia</linkTarget>
+                            <linkName>/opt/${project.artifactId}/config</linkName>
+                            <symlink>true</symlink>
+                        </data>
+                        <!-- symlink from /etc/init.d/columbia to <install-dir>/columbia.jar -->
+                        <data>
+                            <type>link</type>
+                            <linkTarget>/opt/${project.artifactId}/${project.artifactId}.jar</linkTarget>
+                            <linkName>/etc/init.d/columbia</linkName>
+                            <symlink>true</symlink>
+                        </data>
+                    </dataSet>
+                    <deb>${project.build.directory}/deb/${project.artifactId}-${project.version}_all.deb</deb>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-debian-package</id>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
@@ -445,6 +497,12 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.vafer</groupId>
+                    <artifactId>jdeb</artifactId>
+                    <version>1.8</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -551,6 +609,7 @@
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <configuration>
+                            <executable>true</executable>
                             <jvmArguments>-Dvaadin.productionMode</jvmArguments>
                         </configuration>
                     </plugin>

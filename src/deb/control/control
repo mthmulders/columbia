@@ -1,0 +1,7 @@
+Package: [[name]]
+Version: [[version]]
+Section: misc
+Priority: low
+Architecture: all
+Description: Columbia is a web application to manage your AWS S3 Glacier "cold data" backups.
+Maintainer: Maarten Mulders
