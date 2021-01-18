@@ -248,7 +248,7 @@
                             <symlink>true</symlink>
                         </data>
                         <data>
-                            <type>file</file>
+                            <type>file</type>
                             <src>${project.basedir}/src/deb/application-prod.yml</src>
                             <dst>/etc/columbia/application-prod.yml</dst>
                             <mapper>
