@@ -235,7 +235,7 @@
                             <dst>/opt/${project.artifactId}/${project.artifactId}.jar</dst>
                             <mapper>
                                 <type>perm</type>
-                                <filemode>755</filemode>
+                                <filemode>550</filemode>
                                 <user>columbia</user>
                                 <group>columbia</group>
                             </mapper>
