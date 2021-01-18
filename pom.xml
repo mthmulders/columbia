@@ -253,7 +253,7 @@
                             <dst>/etc/columbia/application-prod.yml</dst>
                             <mapper>
                                 <type>perm</type>
-                                <filemode>400</filemode>
+                                <filemode>740</filemode>
                                 <user>columbia</user>
                                 <group>columbia</group>
                             </mapper>
