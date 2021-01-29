@@ -22,7 +22,7 @@
         <sha1>unknown</sha1>
 
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
-        <lombok.version>1.18.16</lombok.version>
+        <lombok.version>1.18.18</lombok.version>
         <spring-boot.version>2.4.2</spring-boot.version>
         <vaadin.version>18.0.5</vaadin.version>
     </properties>
