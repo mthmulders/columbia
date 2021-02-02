@@ -8,10 +8,10 @@ then
 fi
 
 user=columbia
-descr="No description"
+descr="Columbia system user"
 shell=/bin/false
 if ! getent passwd | grep -q "^$user:";
 then
     echo "Creating system user: $user in $group with $descr and shell $shell"
-    useradd --gid $group -r --shell $shell -c "$descr" $user
+    useradd --gid $group -r --shell $shell -c "$descr" $user -d /opt/columbia
 fi

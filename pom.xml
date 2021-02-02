@@ -254,7 +254,7 @@
                             <symlink>true</symlink>
                             <mapper>
                                 <type>perm</type>
-                                <filemode>740</filemode>
+                                <dirmode>740</dirmode>
                                 <user>columbia</user>
                                 <group>columbia</group>
                             </mapper>
