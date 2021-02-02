@@ -1,7 +1,6 @@
 package it.mulders.columbia.config;
 
 import lombok.Data;
-import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.regions.Region;
 
 @Data
