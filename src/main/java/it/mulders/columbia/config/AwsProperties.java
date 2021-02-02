@@ -1,12 +1,9 @@
 package it.mulders.columbia.config;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.regions.Region;
 
-@Configuration
-@ConfigurationProperties("columbia.aws")
 @Data
 public class AwsProperties {
     private String accessKeyId;

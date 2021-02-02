@@ -2,6 +2,7 @@ package it.mulders.columbia.config;
 
 import it.mulders.columbia.vaults.VaultService;
 import it.mulders.columbia.vaults.VaultServiceImpl;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -10,6 +11,12 @@ import software.amazon.awssdk.services.glacier.GlacierClient;
 
 @Configuration
 public class AwsConfiguration {
+    @Bean
+    @ConfigurationProperties( "columbia.aws")
+    public AwsProperties awsProperties() {
+        return new AwsProperties();
+    }
+
     @Bean
     public AwsCredentialsProvider awsCredentialsProvider(final AwsProperties awsProperties) {
         return () -> AwsBasicCredentials.create(awsProperties.getAccessKeyId(), awsProperties.getSecretAccessKey());
