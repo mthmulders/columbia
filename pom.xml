@@ -246,6 +246,12 @@
                             <linkTarget>/etc/columbia</linkTarget>
                             <linkName>/opt/${project.artifactId}/config</linkName>
                             <symlink>true</symlink>
+                            <mapper>
+                                <type>perm</type>
+                                <filemode>740</filemode>
+                                <user>columbia</user>
+                                <group>columbia</group>
+                            </mapper>
                         </data>
                         <data>
                             <type>file</type>
