@@ -228,6 +228,12 @@
                             <src>${project.basedir}/src/deb/columbia.conf</src>
                             <dst>/opt/${project.artifactId}/${project.artifactId}.conf</dst>
                             <conffile>true</conffile>
+                            <mapper>
+                                <type>perm</type>
+                                <filemode>550</filemode>
+                                <user>columbia</user>
+                                <group>columbia</group>
+                            </mapper>
                         </data>
                         <data>
                             <type>file</type>
