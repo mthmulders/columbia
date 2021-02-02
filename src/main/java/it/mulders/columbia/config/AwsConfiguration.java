@@ -12,7 +12,7 @@ import software.amazon.awssdk.services.glacier.GlacierClient;
 @Configuration
 public class AwsConfiguration {
     @Bean
-    @ConfigurationProperties( "columbia.aws")
+    @ConfigurationProperties("columbia.aws")
     public AwsProperties awsProperties() {
         return new AwsProperties();
     }
