@@ -259,17 +259,6 @@
                                 <group>columbia</group>
                             </mapper>
                         </data>
-                        <data>
-                            <type>file</type>
-                            <src>${project.basedir}/src/deb/application-prod.yml</src>
-                            <dst>/etc/columbia/application-prod.yml</dst>
-                            <mapper>
-                                <type>perm</type>
-                                <filemode>740</filemode>
-                                <user>columbia</user>
-                                <group>columbia</group>
-                            </mapper>
-                        </data>
                         <!-- symlink from /etc/init.d/columbia to <install-dir>/columbia.jar -->
                         <data>
                             <type>link</type>
