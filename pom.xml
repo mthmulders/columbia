@@ -75,10 +75,11 @@
             </dependency>
 
             <dependency>
-                <groupId>com.github.mvysny.kaributesting</groupId>
-                <artifactId>karibu-testing-v10-spring</artifactId>
-                <version>1.2.8</version>
-                <scope>test</scope>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>2.15.75</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -87,12 +88,6 @@
                 <version>${vaadin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>software.amazon.awssdk</groupId>
-                <artifactId>glacier</artifactId>
-                <version>2.15.75</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
