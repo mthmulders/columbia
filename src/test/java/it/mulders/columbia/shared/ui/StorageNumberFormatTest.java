@@ -6,16 +6,16 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class BytesNumberFormatTest implements WithAssertions {
+class StorageNumberFormatTest implements WithAssertions {
     private String formatLong(final int precision, final long input) {
         var output = new StringBuffer();
-        new BytesNumberFormat(precision).format(input, output, null);
+        new StorageNumberFormat(precision).format(input, output, null);
         return output.toString();
     }
 
     private String formatDouble(final int precision, final double input) {
         var output = new StringBuffer();
-        new BytesNumberFormat(precision).format(input, output, null);
+        new StorageNumberFormat(precision).format(input, output, null);
         return output.toString();
     }
 

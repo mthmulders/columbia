@@ -3,7 +3,7 @@ package it.mulders.columbia.vaults.ui;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import it.mulders.columbia.shared.ui.BytesNumberFormat;
+import it.mulders.columbia.shared.ui.StorageNumberFormat;
 import it.mulders.columbia.vaults.Vault;
 
 import java.text.NumberFormat;
@@ -14,7 +14,7 @@ public class VaultDetailView extends FormLayout {
         this.add(detailRow("ARN", vault.getArn()));
         this.add(detailRow("Name", vault.getName()));
         this.add(detailRow("Number of archives", vault.getArchiveCount()));
-        this.add(detailRow("Vault size", vault.getSizeInBytes(), new BytesNumberFormat(2)));
+        this.add(detailRow("Vault size", vault.getSizeInBytes(), new StorageNumberFormat(2)));
     }
 
     private Component detailRow( final String label, final Long value) {

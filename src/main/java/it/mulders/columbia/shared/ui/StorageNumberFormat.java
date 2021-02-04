@@ -9,7 +9,7 @@ import java.text.ParsePosition;
 import static it.mulders.columbia.shared.ui.ByteCountHelper.humanReadableByteCount;
 
 @AllArgsConstructor
-public class BytesNumberFormat extends NumberFormat {
+public class StorageNumberFormat extends NumberFormat {
     private final int precision;
 
     @Override
