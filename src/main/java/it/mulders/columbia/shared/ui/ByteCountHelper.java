@@ -1,5 +1,6 @@
 package it.mulders.columbia.shared.ui;
 
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DecimalFormat;
@@ -7,6 +8,7 @@ import java.text.DecimalFormat;
 /**
  * Helper class for displaying human-friendly numbers of bytes.
  */
+@UtilityClass
 public class ByteCountHelper {
     private static final long UNIT = 1024;
     private static final String UNITS = "KMGTPE";
