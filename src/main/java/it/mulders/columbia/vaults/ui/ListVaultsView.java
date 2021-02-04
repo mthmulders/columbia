@@ -1,8 +1,6 @@
 package it.mulders.columbia.vaults.ui;
 
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,21 +11,25 @@ import it.mulders.columbia.shared.ui.ErrorMessage;
 import it.mulders.columbia.ui.MainView;
 import it.mulders.columbia.vaults.Vault;
 import it.mulders.columbia.vaults.VaultService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.PostConstruct;
+
+@AllArgsConstructor
 @PageTitle("Vaults")
 @Route(value = "vaults", layout = MainView.class)
 @Slf4j
 public class ListVaultsView extends Div {
     private final VaultService vaultService;
-    private final VerticalLayout detailView = new VerticalLayout();
+    private final VaultDetailView detailView;
 
-    public ListVaultsView(final VaultService vaultService) {
-        this.vaultService = vaultService;
+    @PostConstruct
+    void prepare() {
         setId("list-vaults");
         try {
             add(prepareGrid());
-            add(prepareDetailView());
+            add(new VerticalLayout(detailView));
         } catch (TechnicalException te) {
             add(new ErrorMessage("Could not retrieve vaults"));
         }
@@ -44,18 +46,12 @@ public class ListVaultsView extends Div {
     }
 
     private void valueChanged(final ComponentValueChangeEvent<Grid<Vault>, Vault> event) {
-        detailView.getChildren().forEach(detailView::remove);
 
         final Vault selected = event.getHasValue().getValue();
         if (selected != null) {
-            detailView.add(new VaultDetailView(selected));
+            detailView.setSelectedVault(selected);
         } else {
-            prepareDetailView();
+            detailView.clear();
         }
-    }
-
-    private Component prepareDetailView() {
-        detailView.add(new Div(new Text("No Vault selected")));
-        return detailView;
     }
 }
