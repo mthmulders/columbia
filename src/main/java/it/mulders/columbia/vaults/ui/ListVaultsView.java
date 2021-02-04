@@ -49,6 +49,8 @@ public class ListVaultsView extends Div {
         final Vault selected = event.getHasValue().getValue();
         if (selected != null) {
             detailView.add(new VaultDetailView(selected));
+        } else {
+            prepareDetailView();
         }
     }
 
