@@ -119,10 +119,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.github.mvysny.kaributesting</groupId>
-            <artifactId>karibu-testing-v10-spring</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
             <exclusions>
