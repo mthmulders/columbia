@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class VaultServiceImplTest implements WithAssertions {
     private final GlacierClient client = mock(GlacierClient.class);
-    private final VaultServiceImpl service = new VaultServiceImpl(client);
+    private final VaultService service = new VaultServiceImpl(client);
 
     @DisplayName("listVaults")
     @Nested

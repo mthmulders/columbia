@@ -10,7 +10,7 @@ import java.util.List;
 public interface VaultService {
     /**
      * This operation lists all vaults owned by the calling user’s account.
-     * @return Vaults available in the AWS account
+     * @return Vaults available in the AWS account.
      * @throws TechnicalException When the AWS API call failed.
      */
     List<Vault> listVaults() throws TechnicalException;

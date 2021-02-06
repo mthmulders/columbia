@@ -15,14 +15,6 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__({ @Autowired }))
 @Slf4j
 public class VaultServiceImpl implements VaultService {
-    /**
-     * The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the
-     * credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-'
-     * (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign
-     * the request.
-     */
-    private static final String ACCOUNT_ID = "-";
-
     private final GlacierClient client;
 
     @Override
@@ -32,12 +24,11 @@ public class VaultServiceImpl implements VaultService {
 
     List<Vault> listVaults(final String marker) throws TechnicalException {
         var request = ListVaultsRequest.builder()
-                .accountId(ACCOUNT_ID)
                 .marker(marker)
                 .build();
 
         try {
-            log.info("List Glacier vaults: accountId={}, marker={}", ACCOUNT_ID, marker);
+            log.info("List Glacier vaults: marker={}", marker);
             var response = client.listVaults(request);
 
             if (response.hasVaultList()) {
@@ -59,8 +50,8 @@ public class VaultServiceImpl implements VaultService {
             log.warn("Response contained no vaults");
             return List.of();
         } catch (SdkException e) {
-            log.error("Cannot list vaults in Amazon account - communication error: accountId={}, error={}",
-                    ACCOUNT_ID, e.getMessage(), e);
+            log.error("Cannot list vaults in Amazon account - communication error: marker={}, error={}",
+                    marker, e.getMessage(), e);
             throw new TechnicalException("Cannot list vaults in Amazon account", e);
         }
     }
