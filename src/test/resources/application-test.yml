@@ -3,9 +3,3 @@ columbia:
     access-key-id: access-key-id
     region: eu-central-1
     secret-access-key: secret-access-key
-
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/columbia
-    username: columbia
-    password: columbia
