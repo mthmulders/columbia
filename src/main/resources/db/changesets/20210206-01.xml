@@ -3,7 +3,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-    <changeSet id="20210204-01" author="maartenm">
+    <changeSet id="20210206-01" author="maartenm">
         <createTable tableName="inventory_retrieval_job">
             <column name="id" type="${uuid_type}">
                 <constraints nullable="false" unique="true" />
@@ -15,6 +15,9 @@
                 <constraints nullable="false" />
             </column>
             <column name="vault_arn" type="varchar">
+                <constraints nullable="false" />
+            </column>
+            <column name="vault_name" type="varchar">
                 <constraints nullable="false" />
             </column>
             <column name="status" type="varchar">

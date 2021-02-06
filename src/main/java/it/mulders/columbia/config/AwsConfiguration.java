@@ -1,5 +1,7 @@
 package it.mulders.columbia.config;
 
+import it.mulders.columbia.jobs.GlacierJobService;
+import it.mulders.columbia.jobs.GlacierJobServiceImpl;
 import it.mulders.columbia.vaults.VaultService;
 import it.mulders.columbia.vaults.VaultServiceImpl;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -31,7 +33,12 @@ public class AwsConfiguration {
     }
 
     @Bean
-    VaultService vaultService(final GlacierClient glacierClient) {
+    public VaultService vaultService(final GlacierClient glacierClient) {
         return new VaultServiceImpl(glacierClient);
+    }
+
+    @Bean
+    public GlacierJobService glacierJobService(final GlacierClient glacierClient) {
+        return new GlacierJobServiceImpl(glacierClient);
     }
 }

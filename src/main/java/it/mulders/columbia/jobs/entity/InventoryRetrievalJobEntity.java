@@ -39,6 +39,8 @@ public class InventoryRetrievalJobEntity {
     private String jobId;
     @Column(name = "vault_arn", nullable = false)
     private String vaultArn;
+    @Column(name = "vault_name", nullable = false)
+    private String vaultName;
     @Enumerated( EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
