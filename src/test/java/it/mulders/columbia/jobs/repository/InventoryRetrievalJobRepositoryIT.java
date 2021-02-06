@@ -35,6 +35,7 @@ class InventoryRetrievalJobRepositoryIT extends AbstractIT implements WithAssert
                 .jobId("42")
                 .status(InventoryRetrievalJobEntity.Status.IN_PROGRESS)
                 .vaultArn("arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault")
+                .vaultName("Example_Vault")
                 .build());
 
 
