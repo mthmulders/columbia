@@ -217,6 +217,8 @@
                 <configuration>
                     <classpathDependencyExcludes>
                         <classpathDependencyExclude>com.vaadin:vaadin-spring-boot-starter</classpathDependencyExclude>
+                        <classpathDependencyExclude>com.vaadin:vaadin-spring</classpathDependencyExclude>
+                        <classpathDependencyExclude>com.vaadin:vaadin-core</classpathDependencyExclude>
                     </classpathDependencyExcludes>
                 </configuration>
             </plugin>
