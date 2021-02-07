@@ -1,6 +1,6 @@
 # Columbia
 
-![CI build](https://github.com/mthmulders/columbia/workflows/CI%20build/badge.svg)
+[![CI build](https://github.com/mthmulders/columbia/workflows/CI%20build/badge.svg)](https://github.com/mthmulders/columbia/actions?query=workflow%3A%22CI+build%22)
 [![SonarCloud quality gate](https://sonarcloud.io/api/project_badges/measure?project=mthmulders_columbia&metric=alert_status)](https://sonarcloud.io/dashboard?id=mthmulders_columbia)
 [![SonarCloud vulnerability count](https://sonarcloud.io/api/project_badges/measure?project=mthmulders_columbia&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=mthmulders_columbia)
 [![SonarCloud technical debt](https://sonarcloud.io/api/project_badges/measure?project=mthmulders_columbia&metric=sqale_index)](https://sonarcloud.io/dashboard?id=mthmulders_columbia)
