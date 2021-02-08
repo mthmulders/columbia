@@ -4,6 +4,8 @@ import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  * Helper class for displaying human-friendly numbers of bytes.
@@ -18,7 +20,8 @@ public class ByteCountHelper {
             return Integer.toString((int) number);
         } else {
             var zeroes = StringUtils.repeat('#', precision);
-            var format = new DecimalFormat("#,###." + zeroes);
+            var symbols = DecimalFormatSymbols.getInstance(Locale.UK);
+            var format = new DecimalFormat("#,###." + zeroes, symbols);
             return format.format(number);
         }
     }
