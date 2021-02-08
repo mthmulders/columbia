@@ -5,10 +5,16 @@
 
     <appender name="noop" class="ch.qos.logback.core.helpers.NOPAppender" />
 
-    <!--logger name="it.mulders.columbia" level="info" /-->
+    <logger name="it.mulders.columbia" level="info">
+        <appender-ref ref="CONSOLE" />
+    </logger>
     <!--logger name="liquibase" level="info" /-->
-    <!--logger name="org.hibernate.SQL" level="debug" /-->
-    <!--logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace" /-->
+    <logger name="org.hibernate.SQL" level="debug">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace">
+        <appender-ref ref="CONSOLE" />
+    </logger>
     <!--logger name="org.testcontainers" level="info" /-->
 
     <root level="warn">
