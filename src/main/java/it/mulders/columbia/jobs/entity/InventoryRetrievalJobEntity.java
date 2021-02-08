@@ -23,7 +23,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @Table(name = "inventory_retrieval_job")
-@ToString(of = { "id", "vaultArn", "status" })
+@ToString()
 public class InventoryRetrievalJobEntity {
     public enum Status {
         IN_PROGRESS,
