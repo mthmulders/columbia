@@ -416,7 +416,10 @@
                         </outputFormats>
                         <targetClasses>
                             <param>it.mulders.columbia.*</param>
-                        </targetClasses>
+		        </targetClasses>
+			<targetTests>
+                            <param>it.mulders.columbia.*Test</param>
+			</targetTests>
                     </configuration>
                 </plugin>
 
