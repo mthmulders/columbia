@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.UUID;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -19,9 +21,10 @@ class InventoryRetrievalJobRepositoryIT extends AbstractIT implements WithAssert
     @Test
     void should_retrieve_by_id() {
         // Arrange
+        var started = LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS);
         var entity = repository.save(InventoryRetrievalJobEntity.builder()
                 .id(UUID.randomUUID())
-                .started(LocalDateTime.now())
+                .started(started)
                 .jobId("42")
                 .status(InventoryRetrievalJobEntity.Status.IN_PROGRESS)
                 .vaultArn("arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault")
