@@ -1,9 +1,9 @@
 package it.mulders.columbia.jobs.repository;
 
 import it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.UUID;
 
-public interface InventoryRetrievalJobRepository extends CrudRepository<InventoryRetrievalJobEntity, UUID> {
+public interface InventoryRetrievalJobRepository extends PagingAndSortingRepository<InventoryRetrievalJobEntity, UUID> {
 }

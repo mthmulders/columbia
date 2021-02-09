@@ -27,7 +27,6 @@ import java.util.UUID;
 public class InventoryRetrievalJobEntity {
     public enum Status {
         IN_PROGRESS,
-        OUTPUT_AVAILABLE,
         DONE
     }
     @Id
