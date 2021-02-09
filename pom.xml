@@ -404,7 +404,7 @@
                         </avoidCallsTo>
                         <excludedClasses>
                             <excludedClass>*Builder</excludedClass>
-                            <excludedClass>it.mulders.columbia.*.ui.*</excludedClass>
+                            <excludedClass>*.ui.*</excludedClass>
                         </excludedClasses>
                         <excludedMethods>
                             <excludedMethods>equals</excludedMethods>
