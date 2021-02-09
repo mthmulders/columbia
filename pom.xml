@@ -404,6 +404,7 @@
                         </avoidCallsTo>
                         <excludedClasses>
                             <excludedClass>*Builder</excludedClass>
+                            <excludedClass>it.mulders.columbia.*.ui</excludedClass>
                         </excludedClasses>
                         <excludedMethods>
                             <excludedMethods>equals</excludedMethods>
@@ -416,10 +417,10 @@
                         </outputFormats>
                         <targetClasses>
                             <param>it.mulders.columbia.*</param>
-		        </targetClasses>
-			<targetTests>
+		                </targetClasses>
+			            <targetTests>
                             <param>it.mulders.columbia.*Test</param>
-			</targetTests>
+			            </targetTests>
                     </configuration>
                 </plugin>
 
