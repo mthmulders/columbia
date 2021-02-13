@@ -28,7 +28,7 @@ public class GlacierJobServiceImpl implements GlacierJobService {
             var response = glacierClient.initiateJob(request);
             return response.jobId();
         } catch ( SdkException e) {
-            log.error("Cannot initiate inventory retrieval for Vault {} - communication error: name={}, arn={}",
+            log.error("Cannot initiate inventory retrieval for Vault {} - communication error: arn={},message={}",
                     vault.getName(), vault.getArn(), e.getMessage(), e);
             throw new TechnicalException("Cannot initiate inventory retrieval for Vault " + vault.getName(), e);
         }
