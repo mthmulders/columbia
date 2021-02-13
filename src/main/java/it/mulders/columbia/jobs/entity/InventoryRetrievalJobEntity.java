@@ -27,7 +27,8 @@ import java.util.UUID;
 public class InventoryRetrievalJobEntity {
     public enum Status {
         IN_PROGRESS,
-        DONE
+        FAILED,
+        SUCCEEDED
     }
     @Id
     @Column(name = "id", nullable = false)

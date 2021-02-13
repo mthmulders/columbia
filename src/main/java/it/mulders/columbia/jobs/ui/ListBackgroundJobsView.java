@@ -45,7 +45,8 @@ public class ListBackgroundJobsView extends Div {
         protected String getFormattedValue(final InventoryRetrievalJobEntity.Status status) {
             return switch (status) {
                 case IN_PROGRESS -> "In Progress";
-                case DONE -> "Done";
+                case FAILED -> "Failed";
+                case SUCCEEDED -> "Done";
             };
         }
     }
