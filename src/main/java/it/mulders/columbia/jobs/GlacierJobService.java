@@ -1,10 +1,7 @@
 package it.mulders.columbia.jobs;
 
-import it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity;
 import it.mulders.columbia.shared.TechnicalException;
 import it.mulders.columbia.vaults.Vault;
-
-import java.util.Optional;
 
 public interface GlacierJobService {
 
