@@ -70,10 +70,6 @@ public class VaultDetailView extends FormLayout {
         return item;
     }
 
-    private TextField item(final Long value) {
-        return item(value, NumberFormat.getInstance());
-    }
-
     private TextField item(final Long value, final NumberFormat format) {
         return item(format.format(value));
     }

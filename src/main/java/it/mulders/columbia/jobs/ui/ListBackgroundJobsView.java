@@ -29,11 +29,7 @@ public class ListBackgroundJobsView extends Div {
     @PostConstruct
     void prepare() {
         setId("list-background-jobs");
-        try {
-            add(prepareGrid());
-        } catch ( TechnicalException te) {
-            add(new ErrorMessage("Could not retrieve vaults"));
-        }
+        add(prepareGrid());
     }
 
     static class StatusRenderer extends BasicRenderer<InventoryRetrievalJobEntity, InventoryRetrievalJobEntity.Status> {
@@ -51,7 +47,7 @@ public class ListBackgroundJobsView extends Div {
         }
     }
 
-    protected Grid<InventoryRetrievalJobEntity> prepareGrid() throws TechnicalException {
+    protected Grid<InventoryRetrievalJobEntity> prepareGrid() {
         var formatter = DateTimeFormatter.ofPattern("EEEE d MMMM yyyy, HH:mm:ss");
 
         var grid = new Grid<InventoryRetrievalJobEntity>();
