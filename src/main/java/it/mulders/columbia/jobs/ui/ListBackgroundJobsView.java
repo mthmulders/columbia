@@ -9,8 +9,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity;
 import it.mulders.columbia.jobs.repository.InventoryRetrievalJobRepository;
-import it.mulders.columbia.shared.TechnicalException;
-import it.mulders.columbia.shared.ui.ErrorMessage;
 import it.mulders.columbia.shared.ui.SpringDataProvider;
 import it.mulders.columbia.ui.MainView;
 import lombok.AllArgsConstructor;
