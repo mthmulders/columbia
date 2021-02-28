@@ -80,14 +80,17 @@ class GlacierJobServiceImplTest implements WithAssertions {
         @Test
         void should_translate_in_progress_status() throws TechnicalException {
             // Arrange
-            var jobId = "42";
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId("42")
+                    .vaultName("Example")
+                    .build();
             var response = DescribeJobResponse.builder()
                     .statusCode(StatusCode.IN_PROGRESS)
                     .build();
             when(client.describeJob(any(DescribeJobRequest.class))).thenReturn(response);
 
             // Act
-            var result = service.getInventoryRetrievalJobStatus(jobId);
+            var result = service.getInventoryRetrievalJobStatus(job);
 
             // Assert
             assertThat(result).hasValue(InventoryRetrievalJobEntity.Status.IN_PROGRESS);
@@ -96,14 +99,17 @@ class GlacierJobServiceImplTest implements WithAssertions {
         @Test
         void should_translate_failed_status() throws TechnicalException {
             // Arrange
-            var jobId = "42";
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId("42")
+                    .vaultName("Example")
+                    .build();
             var response = DescribeJobResponse.builder()
                     .statusCode(StatusCode.FAILED)
                     .build();
             when(client.describeJob(any(DescribeJobRequest.class))).thenReturn(response);
 
             // Act
-            var result = service.getInventoryRetrievalJobStatus(jobId);
+            var result = service.getInventoryRetrievalJobStatus(job);
 
             // Assert
             assertThat(result).hasValue(InventoryRetrievalJobEntity.Status.FAILED);
@@ -112,14 +118,17 @@ class GlacierJobServiceImplTest implements WithAssertions {
         @Test
         void should_translate_succeeded_status() throws TechnicalException {
             // Arrange
-            var jobId = "42";
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId("42")
+                    .vaultName("Example")
+                    .build();
             var response = DescribeJobResponse.builder()
                     .statusCode(StatusCode.SUCCEEDED)
                     .build();
             when(client.describeJob(any(DescribeJobRequest.class))).thenReturn(response);
 
             // Act
-            var result = service.getInventoryRetrievalJobStatus(jobId);
+            var result = service.getInventoryRetrievalJobStatus(job);
 
             // Assert
             assertThat(result).hasValue(InventoryRetrievalJobEntity.Status.SUCCEEDED);
@@ -128,14 +137,17 @@ class GlacierJobServiceImplTest implements WithAssertions {
         @Test
         void should_return_empty_for_unknown_status() throws TechnicalException {
             // Arrange
-            var jobId = "42";
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId("42")
+                    .vaultName("Example")
+                    .build();
             var response = DescribeJobResponse.builder()
                     .statusCode(StatusCode.UNKNOWN_TO_SDK_VERSION)
                     .build();
             when(client.describeJob(any(DescribeJobRequest.class))).thenReturn(response);
 
             // Act
-            var result = service.getInventoryRetrievalJobStatus(jobId);
+            var result = service.getInventoryRetrievalJobStatus(job);
 
             // Assert
             assertThat(result).isNotPresent();

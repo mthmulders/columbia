@@ -19,11 +19,11 @@ public interface GlacierJobService {
 
     /**
      * Checks the specified "inventory retrieval" job to see if it has finished
-     * @param jobId The AWS identifier for the job.
+     * @param job The job entity.
      * @return The status of the job, or an empty {@link Optional} if it cannot be determined.
      * @throws TechnicalException When the AWS API call failed.
      */
-    Optional<InventoryRetrievalJobEntity.Status> getInventoryRetrievalJobStatus(final String jobId) throws TechnicalException;
+    Optional<InventoryRetrievalJobEntity.Status> getInventoryRetrievalJobStatus(final InventoryRetrievalJobEntity job) throws TechnicalException;
 
     /**
      * Get the output of an "inventory retrieval" job.

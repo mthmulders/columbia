@@ -56,17 +56,21 @@ public class GlacierJobServiceImpl implements GlacierJobService {
     }
 
     @Override
-    public Optional<InventoryRetrievalJobEntity.Status> getInventoryRetrievalJobStatus(final String jobId) throws TechnicalException {
+    public Optional<InventoryRetrievalJobEntity.Status> getInventoryRetrievalJobStatus(final InventoryRetrievalJobEntity job) throws TechnicalException {
+        var jobId = job.getJobId();
+        var vaultName = job.getVaultName();
+
         var request = DescribeJobRequest.builder()
                 .jobId(jobId)
+                .vaultName(vaultName)
                 .build();
 
         try {
             var response = glacierClient.describeJob(request);
 
             if (response.statusCode() == UNKNOWN_TO_SDK_VERSION) {
-                log.error("Inventory retrieval job has unknown status: job-id={}, status={}",
-                        jobId, response.statusCode());
+                log.error("Inventory retrieval job has unknown status: job-id={}, vault-name={}, status={}",
+                        jobId, vaultName, response.statusCode());
                 return Optional.empty();
             }
 
@@ -77,9 +81,12 @@ public class GlacierJobServiceImpl implements GlacierJobService {
                 case UNKNOWN_TO_SDK_VERSION -> null;
             });
 
-        } catch (SdkException e) {
-            log.error("Cannot get inventory retrieval job status for job {} - communication error: job-id={},message={}",
-                    jobId, e.getMessage(), e);
+        } catch (final ResourceNotFoundException e) {
+            log.info("{}", e.getMessage());
+            return Optional.of(InventoryRetrievalJobEntity.Status.EXPIRED);
+        } catch (final SdkException e) {
+            log.error("Cannot get inventory retrieval job status for job {} - communication error: job-id={}, vault-name={}, message={}",
+                    jobId, vaultName, e.getMessage(), e);
             throw new TechnicalException("Cannot get inventory retrieval job status for job " + jobId, e);
         }
     }

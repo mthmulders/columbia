@@ -20,7 +20,7 @@ public class CheckInventoryJobStatusService {
 
     @SneakyThrows(TechnicalException.class)
     public void checkJobStatus(final InventoryRetrievalJobEntity jobEntity) {
-        glacierJobService.getInventoryRetrievalJobStatus(jobEntity.getJobId()).ifPresent(status -> {
+        glacierJobService.getInventoryRetrievalJobStatus(jobEntity).ifPresent(status -> {
             switch (status) {
                 case SUCCEEDED:
                     handleSucceededJob(jobEntity);

@@ -39,6 +39,7 @@ class CheckInventoryJobStatusServiceTest implements WithAssertions {
         var jobId = "42";
         var job = InventoryRetrievalJobEntity.builder()
                 .jobId(jobId)
+                .vaultName("Example")
                 .build();
         when(jobRepository.findInProgress()).thenReturn(List.of(job));
 
@@ -46,7 +47,7 @@ class CheckInventoryJobStatusServiceTest implements WithAssertions {
         service.checkAllJobsStatus();
 
         // Assert
-        verify(glacierJobService).getInventoryRetrievalJobStatus(jobId);
+        verify(glacierJobService).getInventoryRetrievalJobStatus(job);
     }
 
     @DisplayName("For failed jobs")
