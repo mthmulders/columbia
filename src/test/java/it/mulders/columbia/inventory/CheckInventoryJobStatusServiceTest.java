@@ -4,6 +4,7 @@ import it.mulders.columbia.jobs.GlacierJobService;
 import it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity;
 import it.mulders.columbia.jobs.repository.InventoryRetrievalJobRepository;
 import it.mulders.columbia.shared.TechnicalException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 import static it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity.Status.FAILED;
 import static it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity.Status.IN_PROGRESS;
+import static it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity.Status.SUCCEEDED;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -97,6 +99,22 @@ class CheckInventoryJobStatusServiceTest implements WithAssertions {
     @DisplayName("For succeeded jobs")
     @Nested
     class SucceededJob {
+        @Test
+        void should_fetch_job_output() throws TechnicalException {
+            // Arrange
+            var jobId = RandomStringUtils.randomAlphanumeric(16);
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId(jobId)
+                    .build();
+            when(jobRepository.findInProgress()).thenReturn(List.of(job));
+            when(glacierJobService.getInventoryRetrievalJobStatus(any()))
+                    .thenReturn(Optional.of(SUCCEEDED));
 
+            // Act
+            service.checkAllJobsStatus();
+
+            // Assert
+            verify(glacierJobService).getInventoryRetrievalJobOutput(job);
+        }
     }
 }

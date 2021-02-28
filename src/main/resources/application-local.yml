@@ -3,6 +3,7 @@ columbia:
     access-key-id: access-key-id
     region: eu-central-1
     secret-access-key: secret-access-key
+  job-check-interval: PT1M
 
 logging:
   level:

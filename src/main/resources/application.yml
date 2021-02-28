@@ -1,3 +1,6 @@
+columbia:
+  job-check-interval: PT1H
+
 logging:
   level:
     ROOT: WARN

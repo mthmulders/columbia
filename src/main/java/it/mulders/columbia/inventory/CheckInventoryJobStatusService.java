@@ -7,13 +7,17 @@ import it.mulders.columbia.shared.TechnicalException;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
+@Component
 @Slf4j
 public class CheckInventoryJobStatusService {
     private final GlacierJobService glacierJobService;
     private final InventoryRetrievalJobRepository jobRepository;
 
+    @Scheduled(fixedDelayString = "${columbia.job-check-interval}")
     public void checkAllJobsStatus() {
         jobRepository.findInProgress().forEach(this::checkJobStatus);
     }
@@ -31,6 +35,11 @@ public class CheckInventoryJobStatusService {
 
     private void handleSucceededJob(final InventoryRetrievalJobEntity jobEntity) {
         log.info("Job has finished successfully: job-id={}", jobEntity.getId());
+        try {
+            var output = glacierJobService.getInventoryRetrievalJobOutput(jobEntity);
+        } catch (TechnicalException e) {
+            log.error("Could not retrieve job output: {}", e.getMessage());
+        }
     }
 
     private void handleFailedJob(final InventoryRetrievalJobEntity jobEntity) {
