@@ -152,6 +152,22 @@ class GlacierJobServiceImplTest implements WithAssertions {
             // Assert
             assertThat(result).isNotPresent();
         }
+
+        @Test
+        void should_return_expired_for_no_job() throws TechnicalException {
+            // Arrange
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId("42")
+                    .vaultName("Example")
+                    .build();
+            when(client.describeJob(any(DescribeJobRequest.class))).thenThrow(ResourceNotFoundException.class);
+
+            // Act
+            var result = service.getInventoryRetrievalJobStatus(job);
+
+            // Assert
+            assertThat(result).hasValue(InventoryRetrievalJobEntity.Status.EXPIRED);
+        }
     }
 
     @DisplayName("getInventoryRetrievalJobOutput")

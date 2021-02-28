@@ -26,6 +26,7 @@ import java.util.UUID;
 @ToString(of = { "id", "vaultArn", "status" })
 public class InventoryRetrievalJobEntity {
     public enum Status {
+        EXPIRED, // AWS doesn't know this status; we use it for jobs that cannot be retrieved anymore
         IN_PROGRESS,
         FAILED,
         SUCCEEDED
