@@ -1,5 +1,6 @@
 package it.mulders.columbia.jobs;
 
+import it.mulders.columbia.inventory.aws.VaultInventory;
 import it.mulders.columbia.jobs.entity.InventoryRetrievalJobEntity;
 import it.mulders.columbia.shared.TechnicalException;
 import it.mulders.columbia.vaults.Vault;
@@ -23,4 +24,12 @@ public interface GlacierJobService {
      * @throws TechnicalException When the AWS API call failed.
      */
     Optional<InventoryRetrievalJobEntity.Status> getInventoryRetrievalJobStatus(final String jobId) throws TechnicalException;
+
+    /**
+     * Get the output of an "inventory retrieval" job.
+     * @param job The job entity.
+     * @return The output of the job.
+     * @throws TechnicalException When the AWS API call failed.
+     */
+    Optional<VaultInventory> getInventoryRetrievalJobOutput(final InventoryRetrievalJobEntity job) throws TechnicalException;
 }

@@ -10,12 +10,21 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.http.AbortableInputStream;
 import software.amazon.awssdk.services.glacier.GlacierClient;
 import software.amazon.awssdk.services.glacier.model.DescribeJobRequest;
 import software.amazon.awssdk.services.glacier.model.DescribeJobResponse;
+import software.amazon.awssdk.services.glacier.model.GetJobOutputRequest;
+import software.amazon.awssdk.services.glacier.model.GetJobOutputResponse;
 import software.amazon.awssdk.services.glacier.model.InitiateJobRequest;
 import software.amazon.awssdk.services.glacier.model.InitiateJobResponse;
+import software.amazon.awssdk.services.glacier.model.ResourceNotFoundException;
 import software.amazon.awssdk.services.glacier.model.StatusCode;
+
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -130,6 +139,58 @@ class GlacierJobServiceImplTest implements WithAssertions {
 
             // Assert
             assertThat(result).isNotPresent();
+        }
+    }
+
+    @DisplayName("getInventoryRetrievalJobOutput")
+    @Nested
+    class GetInventoryRetrievalJobOutput {
+        @Test
+        void should_parse_inventory_json() throws TechnicalException {
+            // Arrange
+            var job = InventoryRetrievalJobEntity.builder()
+                    .jobId("42")
+                    .vaultName("Example_Vault")
+                    .build();
+            var data = """
+                    { "VaultARN":"arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault",
+                      "InventoryDate":"2021-02-02T13:26:19Z",
+                      "ArchiveList": [
+                        { "ArchiveId":"EQsa8jBfaGH-yKf5NIQd5ZW8c3KjPO7YXXPWJCDGeQJiTQgz2Cw7On09EHNIX0mDwMuwP7WIbuSlqb0WpaIyAGO-snMoyvgVftxgoIH8_tsevhgdmfloP7YFKk2bz7W2NAE5MxKHEA",
+                          "ArchiveDescription":"{\\"path\\": \\"/file1.txt\\", \\"type\\": \\"file\\"}",
+                          "CreationDate":"2021-01-03T13:48:33Z",
+                          "Size":528,
+                          "SHA256TreeHash":"624d68f02172c23d8a22d0579d183b2597c9211bcd2df6e8fd84937689af5062"
+                        },
+                        { "ArchiveId":"PTehft2gBdoQ1PxbLejw8ceqBbupFGsL5WNZRA2cvXJmamhFnd9IGbA7Kjgn_FEdPWJhgqk_IiQpjdUdzufhLY1JOpQYESt_ZUrQ_myRKdo_UAZjwInP0TKFO5sSp5gF-POYiLELQQ",
+                          "ArchiveDescription":"{\\"path\\": \\"/file2.txt\\", \\"type\\": \\"file\\"}",
+                          "CreationDate":"2021-01-03T13:48:34Z",
+                          "Size":528,
+                          "SHA256TreeHash":"0b9d98845e3d87cb02ac4eece86cbb2b6f5377242785544527da3965f1dc166e"
+                        }
+                      ]
+                   }
+                """;
+            var bytes = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
+            var response = new ResponseInputStream<>(
+                    GetJobOutputResponse.builder().build(),
+                    AbortableInputStream.create(bytes)
+            );
+            when(client.getJobOutput(any(GetJobOutputRequest.class))).thenReturn(response);
+
+            // Act
+            var result = service.getInventoryRetrievalJobOutput(job);
+
+            // Assert
+            assertThat(result).isPresent().hasValueSatisfying(inventory -> {
+                assertThat(inventory.getVaultARN()).isEqualTo("arn:aws:glacier:eu-central-1:460046808775:vaults/Example_Vault");
+                assertThat(inventory.getInventoryDate()).isEqualToIgnoringNanos(LocalDateTime.parse("2021-02-02T13:26:19"));
+                assertThat(inventory.getArchives()).hasSize(2);
+                assertThat(inventory.getArchives()).allSatisfy(archive -> {
+                    assertThat(archive.getSize()).isEqualTo(528);
+                    assertThat(archive.getDescription().getType()).isEqualTo("file");
+                });
+            });
         }
     }
 }
