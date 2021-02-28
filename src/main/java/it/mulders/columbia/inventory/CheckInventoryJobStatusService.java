@@ -22,15 +22,9 @@ public class CheckInventoryJobStatusService {
     public void checkJobStatus(final InventoryRetrievalJobEntity jobEntity) {
         glacierJobService.getInventoryRetrievalJobStatus(jobEntity).ifPresent(status -> {
             switch (status) {
-                case SUCCEEDED:
-                    handleSucceededJob(jobEntity);
-                    break;
-                case FAILED:
-                    handleFailedJob(jobEntity);
-                    break;
-                case IN_PROGRESS:
-                    log.info("Job is still in progress: job-id={}", jobEntity.getId());
-                    break;
+                case SUCCEEDED -> handleSucceededJob(jobEntity);
+                case FAILED -> handleFailedJob(jobEntity);
+                case IN_PROGRESS -> log.info("Job is still in progress: job-id={}", jobEntity.getId());
             }
         });
     }
