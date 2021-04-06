@@ -29,6 +29,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 15
+          distribution: 'adopt'
+          check-latest: true
 
       - name: Build
         run: mvn verify -Pproduction -e -B -V -Dsha1=$(git rev-parse HEAD | cut -c1-8)
