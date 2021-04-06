@@ -22,9 +22,11 @@ jobs:
             columbia-
 
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
           java-version: 15
+          distribution: 'adopt'
+          check-latest: true
 
       - name: Run mutation testing
         run: mvn test -e -B -V -Dsha1=$(git rev-parse HEAD | cut -c1-8) -P mutation-testing
