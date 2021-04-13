@@ -25,7 +25,7 @@
         <lombok.version>1.18.20</lombok.version>
         <spring-boot.version>2.4.4</spring-boot.version>
         <test-containers.version>1.15.2</test-containers.version>
-        <vaadin.version>19.0.3</vaadin.version>
+        <vaadin.version>19.0.4</vaadin.version>
     </properties>
 
     <scm>
