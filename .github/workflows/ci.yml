@@ -44,3 +44,4 @@ jobs:
         with:
           name: columbia.deb
           path: target/deb/columbia*.deb
+          retention-days: 15
