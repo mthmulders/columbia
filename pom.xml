@@ -24,7 +24,7 @@
         <junit.jupiter.version>5.7.1</junit.jupiter.version>
         <lombok.version>1.18.20</lombok.version>
         <spring-boot.version>2.4.5</spring-boot.version>
-        <test-containers.version>1.15.2</test-containers.version>
+        <test-containers.version>1.15.3</test-containers.version>
         <vaadin.version>19.0.4</vaadin.version>
     </properties>
 
